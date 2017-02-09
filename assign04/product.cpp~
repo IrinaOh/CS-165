@@ -1,0 +1,82 @@
+/***************************************************************
+ * File: product.cpp
+ * Author: Anderson Erichsen Fagundes
+ * Purpose: Contains the method implementations for the Product class.
+ ***************************************************************/
+using namespace std;
+#include <iostream>
+#include <string>
+#include <iomanip>
+#include "product.h"
+
+
+void Product::promptData()
+{
+	cout << "Enter name: ";
+	getline(cin, name);
+	
+	cout << "Enter description: ";
+	getline(cin, description);
+	
+	cout << "Enter weight: ";
+	cin >> weight;
+	cin.clear();
+	cin.ignore(256, '\n');
+
+	cout << "Enter price: ";
+	cin >> price;
+	while (price < 0 || cin.fail())
+	{
+		cin.clear();
+		cin.ignore(256,'\n');
+		cout << "Enter price: ";
+		cin >> price;
+	}
+}
+
+void Product::getSalesTax()
+{
+	salesTax = price * 0.06;
+	
+}
+
+void Product::getShippingCost()
+{
+	if(weight >= 5)
+	{
+		shippingCost = (weight * 0.1) + 2.00 - 0.5;
+	}
+	else
+	{
+		shippingCost = 2.00;
+	}
+	
+}
+
+void Product::getTotalPrice()
+{
+	totalPrice = price + salesTax + shippingCost;
+}
+
+void Product::advertisingDisplay()
+{
+	cout << name << " - $" << price << endl << '(' << description << ')' << endl; 
+}
+
+void Product::inventoryLineItem()
+{
+	cout <<'$' << price << " - " << name << " - " << weight << " lbs\n";
+}
+
+void Product::receipt()
+{
+	cout.setf(ios::fixed);
+    cout.setf(ios::showpoint);
+    cout.precision(2);
+
+	cout << name << endl;
+	cout << "  Price:         $   " << price << endl;
+	cout << "  Sales tax:     $    " << salesTax << endl;
+	cout << "  Shipping cost: $    " << shippingCost << endl;
+	cout << "  Total:         $   " << totalPrice << endl;
+}

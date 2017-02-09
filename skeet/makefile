@@ -1,0 +1,68 @@
+###############################################################
+# Program:
+#     Project 09, Skeet
+#     Brother Falin, CS165
+# Author:
+#     Anderson Erichsen Fagundes
+# Summary:
+#     Skeet Project Full 
+# Above and Beyond
+#     Fire when shoot the rifle
+#     Added a tracker for the ammo used
+###############################################################
+LFLAGS = -lglut -lGLU -lGL
+###############################################################
+# Build the main game
+###############################################################
+a.out: driver.o game.o uiInteract.o uiDraw.o point.o rifle.o bullet.o bird.o sacredbird.o toughbird.o velocity.o
+	g++ driver.o game.o uiInteract.o uiDraw.o point.o rifle.o bullet.o velocity.o bird.o ToughBird.o SacredBird.o $(LFLAGS)
+###############################################################
+# Individual files
+#    uiDraw.o      Draw polygons on the screen and do all OpenGL graphics
+#    uiInteract.o  Handles input events
+#    point.o       The position on the screen
+#    ground.o      Handles the ground / world
+#    game.o        Handles the game interaction
+###############################################################
+uiDraw.o: uiDraw.cpp uiDraw.h point.h
+	g++ -c uiDraw.cpp
+
+uiInteract.o: uiInteract.cpp uiInteract.h point.h
+	g++ -c uiInteract.cpp
+
+point.o: point.cpp point.h
+	g++ -c point.cpp
+
+game.o: game.cpp game.h uiDraw.h uiInteract.h point.h velocity.h rifle.h bird.h bullet.h SacredBird.h ToughBird.h
+	g++ -c game.cpp
+
+driver.o: game.h uiInteract.h driver.cpp
+	g++ -c driver.cpp
+
+rifle.o: rifle.h point.h velocity.h uiDraw.h rifle.cpp
+	g++ -c rifle.cpp
+
+#######################################################################
+# ADD YOUR ADDITIONAL RULES HERE!
+#
+# Then, don't forget to add them to the dependecy list for a.out above.
+#######################################################################
+bird.o: bird.cpp bird.h velocity.h point.h uiDraw.h
+	g++ -c bird.cpp
+
+toughbird.o: ToughBird.cpp ToughBird.h bird.h point.h uiDraw.h
+	g++ -c ToughBird.cpp
+
+sacredbird.o: SacredBird.cpp SacredBird.h bird.h point.h velocity.h uiDraw.h
+	g++ -c SacredBird.cpp
+
+bullet.o: bullet.cpp bullet.h velocity.h
+	g++ -c bullet.cpp
+
+###############################################################
+# General rules
+###############################################################
+clean:
+	rm a.out *.o
+
+

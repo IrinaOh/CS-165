@@ -1,0 +1,30 @@
+/***************************************************************
+ * File: product.h
+ * Author: Anderson Erichsen Fagundes
+ * Purpose: Contains the definition of the Product class
+ ***************************************************************/
+#ifndef PRODUCT_H
+#define PRODUCT_H
+
+// put your class definition here
+class Product
+{
+private:
+	string name;
+	double price;
+	double weight;
+	string description;
+	double salesTax;
+	double shippingCost;
+	double totalPrice;
+public:
+	void promptData();
+	void getSalesTax();
+	void getShippingCost();
+	void getTotalPrice();
+	void advertisingDisplay();
+	void inventoryLineItem();
+	void receipt();
+
+} ;
+#endif
